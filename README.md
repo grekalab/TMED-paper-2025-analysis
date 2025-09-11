@@ -52,11 +52,7 @@ You can get the files by either downloading a ZIP archive or cloning the reposit
 
 #### Option A: Download ZIP File (Easiest)
 
-1.  Navigate to the main page of the GitHub repository:  
-    [https://github.com/grekalab/TMED-paper-2025-analysis](https://github.com/grekalab/TMED-paper-2025-analysis)
-2.  Click the green `<> Code` button.
-3.  Select **"Download ZIP"** from the dropdown menu.
-4.  Unzip the downloaded file (e.g., `TMED-paper-2025-analysis-main.zip`) to a convenient location on your computer.
+Download the ZIP file from here: [TMED-paper-2025-analysis-main.zip](https://github.com/grekalab/TMED-paper-2025-analysis/archive/refs/heads/main.zip).
 
 #### Option B: Clone with Git (Recommended for developers)
 
@@ -75,7 +71,7 @@ git clone [https://github.com/grekalab/TMED-paper-2025-analysis.git](https://git
 
 2.  **Create the Conda Environment:** Use the `environment.yml` file to create a self-contained environment with all the necessary dependencies. This command will download and install the correct version of R and all required packages. This step may take several minutes.
     ```bash
-    conda env create -f environment.yml
+    conda env create -n tmed-analysis -f environment.yml
     ```
 
 3.  **Activate the Environment:** Before running any scripts, you must activate the newly created environment. This makes the specific R version and packages available in your terminal session.
