@@ -12,6 +12,16 @@ This repository contains the R scripts and data necessary to reproduce the phylo
 
 ## System Requirements
 
+To run this analysis, you will need **Conda** installed on your system. The project files can be downloaded directly as a ZIP file or cloned using Git.
+
+* **Conda:** Required for managing the R environment and all dependencies. We recommend installing **Miniconda**, a lightweight version of Conda.
+    * **Installation Guide:** [https://www.anaconda.com/docs/getting-started/miniconda/install](https://www.anaconda.com/docs/getting-started/miniconda/install)
+
+* **Git (Optional):** If you prefer to clone the repository using version control, you will need Git.
+    * **Installation Guide:** [https://github.com/git-guides/install-git](https://github.com/git-guides/install-git)
+
+The specific software versions, including R and all required packages for this project, are defined in the `environment.yml` file.
+
 This analysis was performed using **R version 4.4.3** on Linux. The following R packages are required. They can be installed automatically by following the installation instructions below.
 
 - `r-base>=4.3`
@@ -34,15 +44,38 @@ This analysis was performed using **R version 4.4.3** on Linux. The following R 
 
 ## Installation
 
-1.  **Clone this repository:**
+The installation process involves two main steps: getting the project files and then building the Conda environment.
+
+### Step 1: Get the Project Files
+
+You can get the files by either downloading a ZIP archive or cloning the repository with Git.
+
+#### Option A: Download ZIP File (Easiest)
+
+1.  Navigate to the main page of the GitHub repository:  
+    [https://github.com/grekalab/TMED-paper-2025-analysis](https://github.com/grekalab/TMED-paper-2025-analysis)
+2.  Click the green `<> Code` button.
+3.  Select **"Download ZIP"** from the dropdown menu.
+4.  Unzip the downloaded file (e.g., `TMED-paper-2025-analysis-main.zip`) to a convenient location on your computer.
+
+#### Option B: Clone with Git (Recommended for developers)
+
+Open your terminal and run the following command to clone the repository:
+```bash
+git clone [https://github.com/grekalab/TMED-paper-2025-analysis.git](https://github.com/grekalab/TMED-paper-2025-analysis.git)
+```
+
+### Step 2: Create and Activate the Conda Environment
+
+1.  **Navigate into the project directory** using your terminal.
     ```bash
-    git clone https://github.com/grekalab/TMED-paper-2025-analysis.git
-    cd TMED-paper-2025-analysis
+    # If you downloaded the ZIP, the folder name might end in "-main"
+    cd path/to/TMED-paper-2025-analysis-main
     ```
 
 2.  **Create the Conda Environment:** Use the `environment.yml` file to create a self-contained environment with all the necessary dependencies. This command will download and install the correct version of R and all required packages. This step may take several minutes.
     ```bash
-    conda env create -n tmed-analysis -f environment.yml
+    conda env create -f environment.yml
     ```
 
 3.  **Activate the Environment:** Before running any scripts, you must activate the newly created environment. This makes the specific R version and packages available in your terminal session.
@@ -50,6 +83,7 @@ This analysis was performed using **R version 4.4.3** on Linux. The following R 
     conda activate tmed-analysis
     ```
     Your terminal prompt should now be prefixed with `(tmed-analysis)`. You must do this every time you open a new terminal to work on this project.
+
 
 ---
 
