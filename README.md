@@ -22,7 +22,7 @@ To run this analysis, you will need **Conda** installed on your system. The proj
 
 The specific software versions, including R and all required packages for this project, are defined in the `environment.yml` file.
 
-This analysis was performed using **R version 4.4.3** on Linux. The following R packages are required. They can be installed automatically by following the installation instructions below.
+This analysis was performed using **R version 4.4.3** on Linux using a single CPU core and 2 GB of RAM. The following R packages are required. They can be installed automatically by following the installation instructions below.
 
 - `r-base>=4.3`
 - `r-httr`
@@ -52,7 +52,7 @@ You can get the files by either downloading a ZIP archive or cloning the reposit
 
 #### Option A: Download ZIP File (Easiest)
 
-Download the ZIP file from here: [TMED-paper-2025-analysis-main.zip](https://github.com/grekalab/TMED-paper-2025-analysis/archive/refs/heads/main.zip).
+Download the ZIP file from here: [TMED-paper-2025-analysis-main.zip](https://github.com/grekalab/TMED-paper-2025-analysis/archive/refs/heads/main.zip)
 
 #### Option B: Clone with Git (Recommended for developers)
 
@@ -99,6 +99,8 @@ This script downloads human TMED protein sequences from UniProt, performs a mult
 Rscript scripts/2_tmed_phylogenetic_tree.R
 ```
 
+It usually takes 2-5 minutes with 1,000 bootstrap support replicates.
+
 **Description:**
 The script performs the following steps:
 1.  Downloads reviewed, canonical human TMED protein sequences from UniProt.
@@ -126,6 +128,8 @@ The script performs the following steps:
 4.  Conducts differential expression analysis using the `limma` package.
 5.  Generates a volcano plot and saves it to `output/volcano_plot.png`.
 6.  Saves the full results table to `output/fold_change_data.csv`.
+
+It usually takes 2-5 minutes to run. The imputation step takes the longest to run.
 
 ---
 
