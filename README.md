@@ -22,23 +22,23 @@ To run this analysis, you will need **Conda** installed on your system. The proj
 
 The specific software versions, including R and all required packages for this project, are defined in the `environment.yml` file.
 
-This analysis was performed using **R version 4.4.3** on Linux using a single CPU core and 2 GB of RAM. The following R packages are required. They can be installed automatically by following the installation instructions below.
+This analysis was performed using **R version 4.4.3** on Linux using a single CPU core and 2 GB of RAM. The following R packages are required and the versions used for the analysis are as listed. They can be installed automatically by following the installation instructions below.
 
-- `r-base>=4.3`
-- `r-httr`
-- `r-stringr`
-- `r-phangorn`
-- `r-ggplot2`
-- `r-readr`
-- `r-dplyr`
-- `r-missforest`
-- `r-reshape2`
-- `r-tibble`
-- `r-ggrepel`
-- `bioconductor-msa`
-- `bioconductor-biostrings`
-- `bioconductor-ggtree`
-- `bioconductor-limma`
+- `r-base=4.4.3`
+- `r-httr=1.4.7`
+- `r-stringr=1.5.2`
+- `r-phangorn=2.12.1`
+- `r-ggplot2=3.5.2`
+- `r-readr=2.1.5`
+- `r-dplyr=1.1.4`
+- `r-missforest=1.5`
+- `r-reshape2=1.4.4`
+- `r-tibble=3.3.0`
+- `r-ggrepel=0.9.6`
+- `bioconductor-msa=1.38.0`
+- `bioconductor-biostrings=2.74.0`
+- `bioconductor-ggtree=3.14.0`
+- `bioconductor-limma=3.14.0`
 
 ---
 
