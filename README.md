@@ -38,7 +38,7 @@ This analysis was performed using **R version 4.4.3** on Linux using a single CP
 - `bioconductor-msa=1.38.0`
 - `bioconductor-biostrings=2.74.0`
 - `bioconductor-ggtree=3.14.0`
-- `bioconductor-limma=3.14.0`
+- `bioconductor-limma=3.62.1`
 
 ---
 
@@ -58,7 +58,7 @@ Download the ZIP file from here: [TMED-paper-2025-analysis-main.zip](https://git
 
 Open your terminal and run the following command to clone the repository:
 ```bash
-git clone [https://github.com/grekalab/TMED-paper-2025-analysis.git](https://github.com/grekalab/TMED-paper-2025-analysis.git)
+git clone https://github.com/grekalab/TMED-paper-2025-analysis.git
 ```
 
 ### Step 2: Create and Activate the Conda Environment
