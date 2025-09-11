@@ -1,0 +1,21 @@
+name: tmed-paper-2025-analysis
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - r-base>=4.3
+  - r-httr
+  - r-stringr
+  - r-phangorn
+  - r-ggplot2
+  - r-readr
+  - r-dplyr
+  - r-missforest
+  - r-reshape2
+  - r-tibble
+  - r-ggrepel
+  - bioconductor-msa
+  - bioconductor-biostrings
+  - bioconductor-ggtree
+  - bioconductor-limma

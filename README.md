@@ -4,62 +4,69 @@ This repository contains the R scripts and data necessary to reproduce the phylo
 
 ## Repository Structure
 
-- `/data`: Contains the raw input data for the analyses.
-- `/scripts`: Contains the R scripts used for data processing, analysis, and figure generation.
-- `/output`: The destination for all generated figures and data tables.
+- `data`: Contains the raw input data for the analyses.
+- `scripts`: Contains the R scripts used for data processing, analysis, and figure generation.
+- `output`: The destination for all generated figures and data tables.
 
 ---
 
 ## System Requirements
 
-This analysis was performed using **R version 4.0.0** on Linux. The following R packages are required. They can be installed automatically by following the installation instructions below.
+This analysis was performed using **R version 4.4.3** on Linux. The following R packages are required. They can be installed automatically by following the installation instructions below.
 
-- `tidyverse`
-- `limma`
-- `ggrepel`
-- `reshape2`
-- `missForest`
-- `httr`
-- `Biostrings`
-- `msa`
-- `phangorn`
-- `ape`
-- `ggtree`
-- `renv` (for environment management)
+- `r-base>=4.3`
+- `r-httr`
+- `r-stringr`
+- `r-phangorn`
+- `r-ggplot2`
+- `r-readr`
+- `r-dplyr`
+- `r-missforest`
+- `r-reshape2`
+- `r-tibble`
+- `r-ggrepel`
+- `bioconductor-msa`
+- `bioconductor-biostrings`
+- `bioconductor-ggtree`
+- `bioconductor-limma`
 
 ---
 
 ## Installation
 
-This project uses the `renv` package to ensure reproducibility. To set up the correct environment:
-
-1.  Clone this repository:
+1.  **Clone this repository:**
     ```bash
-    git clone [https://github.com/grekalab/TMED-paper-2025-analysis.git](https://github.com/grekalab/TMED-paper-2025-analysis.git)
+    git clone https://github.com/grekalab/TMED-paper-2025-analysis.git
     cd TMED-paper-2025-analysis
     ```
 
-2.  Open R or RStudio in this directory. The `renv` package will bootstrap itself and prompt you to restore the environment. Type `y` and press Enter.
-    ```r
-    renv::restore()
+2.  **Create the Conda Environment:** Use the `environment.yml` file to create a self-contained environment with all the necessary dependencies. This command will download and install the correct version of R and all required packages. This step may take several minutes.
+    ```bash
+    conda env create -n tmed-analysis -f environment.yml
     ```
-    This will install all the exact package versions used in this analysis into a project-specific library.
+
+3.  **Activate the Environment:** Before running any scripts, you must activate the newly created environment. This makes the specific R version and packages available in your terminal session.
+    ```bash
+    conda activate tmed-analysis
+    ```
+    Your terminal prompt should now be prefixed with `(tmed-analysis)`. You must do this every time you open a new terminal to work on this project.
 
 ---
 
 ## Usage
 
-The scripts are located in the `/scripts` directory and are numbered in the order they should be run.
+The scripts are located in the `scripts` directory and are numbered in the order they should be run.
 
 ### 1. TMED Family Phylogenetic Tree (`1_tmed_phylogenetic_tree.R`)
 
 This script downloads human TMED protein sequences from UniProt, performs a multiple sequence alignment, and generates a maximum likelihood phylogenetic tree with bootstrap support values.
 
-**To run:**
+**To run from the terminal:**
 
-```r
-# From the project root directory
-source("scripts/1_tmed_phylogenetic_tree.R")
+```bash
+# Make sure you have run 'conda activate tmed-analysis' first!
+# Run from the project root directory.
+Rscript scripts/2_tmed_phylogenetic_tree.R
 ```
 
 **Description:**
@@ -74,13 +81,13 @@ The script performs the following steps:
 
 This script performs differential abundance analysis between TMED5 and TMED7 co-immunoprecipitation samples.
 
-**To run:**
+**To run from the terminal:**
 
-```r
-# From the project root directory
-source("scripts/2_limma_volcano_plot.R")
+```bash
+# Make sure you have run 'conda activate tmed-analysis' first!
+# Run from the project root directory.
+Rscript scripts/1_limma_volcano_plot.R
 ```
-
 **Description:**
 The script performs the following steps:
 1.  Reads the raw intensity data from `data/20240826_GrekaLab_MKG_original.csv`.
@@ -96,7 +103,7 @@ The script performs the following steps:
 
 If you use this code or data, please cite our paper:
 
-```<To be filled later>```
+```<TBA>```
 
 ## Contact
 

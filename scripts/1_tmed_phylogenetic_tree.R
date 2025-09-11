@@ -17,10 +17,10 @@
 # -----------------------------
 library(httr)
 library(Biostrings)
+library(stringr)
 library(msa)
 library(phangorn)
-library(stringr)
-library(ape)
+library(ggplot2)
 library(ggtree)
 
 
@@ -58,21 +58,22 @@ print(seqs)
 alignment <- msa(seqs, method = "Muscle")
 
 # Convert to phangorn-compatible format
-alignment_phangorn <- msaConvert(alignment, type = "phangorn::phyDat")
-
+set.seed(20250701) # For reproducibility
+alignment_phangorn <- msaConvert(alignment, type = "seqinr::alignment")
+phy_data <- as.phyDat(alignment_phangorn, type = "AA")
 
 # -----------------------------
 # 3. Phylogenetic Tree Construction
 # -----------------------------
 
 # Create a distance matrix and a neighbor-joining starting tree
-dist_matrix <- dist.ml(alignment_phangorn, model = "WAG")
+dist_matrix <- dist.ml(phy_data, model = "WAG")
 start_tree <- nj(dist_matrix)
 
 # Fit a maximum likelihood model using the neighbor-joining tree as a start point
 # The 'WAG' model is a common substitution model for globular proteins
-fit <- pml(start_tree, data = alignment_phangorn)
-fit <- optim.pml(fit, model = "WAG", rearrangement = "stochastic", control = pml.control(trace = 0))
+fit <- pml(start_tree, data = phy_data)
+fit <- optim.pml(fit, model = "WAG", rearrangement = "stochastic")
 
 
 # -----------------------------
@@ -80,7 +81,7 @@ fit <- optim.pml(fit, model = "WAG", rearrangement = "stochastic", control = pml
 # -----------------------------
 # Perform bootstrap analysis with 1,000 replicates for statistical support
 set.seed(2025)  # For reproducibility
-bs <- bootstrap.pml(fit, bs = 1000, optNni = TRUE, control = pml.control(trace = 0))
+bs <- bootstrap.pml(fit, bs = 1000, optNni = TRUE)
 
 # Get the final maximum likelihood tree
 ml_tree <- fit$tree
@@ -93,18 +94,14 @@ tree_with_bs <- plotBS(ml_tree, bs, type = "p")
 # -----------------------------
 # 5. Plot and Save Tree
 # -----------------------------
-tree_plot <- ggtree(tree_with_bs) +
-  geom_tiplab(hjust = -0.1, size = 3) +
-  geom_nodepoint(aes(subset = !isTip, fill = label), shape = 21, size = 3) +
-  geom_text2(aes(subset = !isTip, label = label), hjust = -0.5, vjust = -0.5, size = 2.5) +
-  scale_fill_continuous(low = "lightblue", high = "darkblue") +
-  labs(title = "Phylogenetic Tree of Human TMED Family Proteins",
-       subtitle = "Maximum Likelihood (WAG model) with 1000 bootstrap replicates") +
-  geom_treescale(x = 1.0, y = 1, width = 0.5, offset = 0.5) +
-  xlim(0, 1.8) +
-  theme(legend.position = "none")
+# Plot tree
+ggtree(tree_with_bs) +
+  geom_tiplab(hjust = -0.1, linetype = "dotted") +
+  geom_text2(aes(subset = !isTip, label = label), hjust = -0.3) +
+  scale_x_continuous(limits = c(0, 1.8)) +
+  geom_treescale(x=1.1, y=2, offset=-0.7, width=0.5)
 
 # Save as PDF
-ggsave("output/tmed_phylogenetic_tree.pdf", plot = tree_plot, height = 4, width = 6)
+ggsave("output/tmed_phylogenetic_tree.pdf", height = 3, width = 6)
 
-print("Phylogenetic tree construction complete. Check the /output directory for the PDF.")
+print("Phylogenetic tree construction complete. Check the output/ directory for the PDF.")

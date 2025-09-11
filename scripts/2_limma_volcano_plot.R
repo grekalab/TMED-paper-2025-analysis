@@ -19,11 +19,13 @@
 rm(list = ls())
 
 # Load libraries
-library(limma)
-library(tidyverse)
-library(ggrepel)
-library(reshape2)
+library(readr)
+library(dplyr)
 library(missForest)
+library(limma)
+library(reshape2)
+library(tibble)
+library(ggrepel)
 
 # -----------------------------
 # 1. Read and Prepare Data
@@ -107,12 +109,17 @@ impute_within_subset <- function(data_subset) {
 # Apply imputation to each treatment group separately
 imputed_treatments_list <- lapply(treatment_cols_list, function(cols) {
   subset_data <- data_norm_na[, cols, drop = FALSE]
-  impute_within_subset(subset_data)
+  cat("Imputing missing data for", names(treatment_cols_list), "...")
+  imputed_data <- impute_within_subset(subset_data)
+  cat("done!\n")
+  names(imputed_data) <- NULL
+  return(imputed_data)
 })
 
 # Combine the imputed data frames back into a single matrix
-imputed_data <- do.call(cbind, imputed_treatments_list)
+imputed_data <- as.matrix(do.call(cbind, imputed_treatments_list))
 write_csv(as.data.frame(imputed_data) %>% rownames_to_column("Gene"), "output/imputed_data.csv")
+colnames(imputed_data) <- groups
 
 # -----------------------------
 # 5. Plot Data Distribution
@@ -157,9 +164,9 @@ rename.map <- c("GORASP2" = "GRASP55", "BLZF1" = "Golgin-45")
 results <- results %>%
   mutate(
     Significant = case_when(
+      Protein %in% target.genes     ~ "Gene of interest",
       adj.P.Val < 0.05 & logFC > 1   ~ "Upregulated in TMED7",
       adj.P.Val < 0.05 & logFC < -1  ~ "Upregulated in TMED5",
-      Protein %in% target.genes     ~ "Gene of interest",
       TRUE                          ~ "Not significant"
     ),
     Protein.renamed = recode(Protein, !!!rename.map),
@@ -184,7 +191,7 @@ volcano <- ggplot(results, aes(x = logFC, y = -log10(P.Value), color = Significa
     segment.color = "black",
     box.padding = 0.5
   ) +
-  scale_color_manual(values = c("Gene of interest" = "red",
+  scale_color_manual(values = c("Gene of interest" = "black",
                                 "Upregulated in TMED7" = "#6666FF",
                                 "Upregulated in TMED5" = "#FF6666",
                                 "Not significant" = "grey70")) +
@@ -195,12 +202,12 @@ volcano <- ggplot(results, aes(x = logFC, y = -log10(P.Value), color = Significa
   ) +
   theme_bw() +
   theme(
-    panel.border = element_rect(colour = "black", fill = NA, linewidth = 0.5),
+    panel.border = element_rect(colour = "black", fill = NA),
     panel.grid.minor = element_blank(),
     panel.grid.major = element_blank(),
     legend.title = element_blank()
   )
 
-ggsave("output/volcano_plot_TMED7_vs_TMED5.png", plot = volcano, width = 7, height = 6)
+ggsave("output/volcano_plot_TMED7_vs_TMED5.png", plot = volcano, width = 8, height = 6)
 
-print("Analysis complete. Check the /output directory for results.")
+print("Analysis complete. Check the output/ directory for results.")
