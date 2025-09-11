@@ -1,8 +1,6 @@
-# Code repository: A therapeutic node for diverse proteinopathies centers on a modular cargo receptor system that controls secretory pathway traffic
-
 # Code for: A therapeutic node for diverse proteinopathies centers on a modular cargo receptor system that controls secretory pathway traffic (2025, under review)
 
-This repository contains the R scripts and data necessary to reproduce the mass spectrometry analysis and phylogenetic tree figures for the manuscript "A therapeutic node for diverse proteinopathies centers on a modular cargo receptor system that controls secretory pathway traffic".
+This repository contains the R scripts and data necessary to reproduce the phylogenetic tree and mass spectrometry analysis figures for the manuscript "A therapeutic node for diverse proteinopathies centers on a modular cargo receptor system that controls secretory pathway traffic".
 
 ## Repository Structure
 
