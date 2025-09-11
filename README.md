@@ -107,4 +107,4 @@ If you use this code or data, please cite our paper:
 
 ## Contact
 
-For questions about the code, please contact John Carlos Ignacio at [jignacio@broadinstitute.org].
+For questions about the code, please contact John Carlos Ignacio at jignacio@broadinstitute.org.
