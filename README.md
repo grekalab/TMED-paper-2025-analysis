@@ -96,7 +96,7 @@ This script downloads human TMED protein sequences from UniProt, performs a mult
 ```bash
 # Make sure you have run 'conda activate tmed-analysis' first!
 # Run from the project root directory.
-Rscript scripts/2_tmed_phylogenetic_tree.R
+Rscript scripts/1_tmed_phylogenetic_tree.R
 ```
 
 It usually takes 2-5 minutes with 1,000 bootstrap support replicates.
@@ -118,7 +118,7 @@ This script performs differential abundance analysis between TMED5 and TMED7 co-
 ```bash
 # Make sure you have run 'conda activate tmed-analysis' first!
 # Run from the project root directory.
-Rscript scripts/1_limma_volcano_plot.R
+Rscript scripts/2_limma_volcano_plot.R
 ```
 **Description:**
 The script performs the following steps:
